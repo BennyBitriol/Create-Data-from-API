@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { lastValueFrom, from } from 'rxjs';
 import { IUser } from './interfaces/user';
+import { GetDepartmentDto } from './dtos/get-department.dto';
 
 @Injectable()
 export class DepartmentService {
@@ -13,7 +14,7 @@ export class DepartmentService {
     sortBy,
     filterKey,
     filterValue,
-  }: MasterDataQuery) {
+  }: GetDepartmentDto) {
     // Create a params object for the Axios request
     const params: { [key: string]: any } = {
       limit: limit ?? 10, // Default to 10 records
@@ -106,18 +107,8 @@ export class DepartmentService {
     return Object.fromEntries(departmentSummary);
   }
 
-  public async getMasterData(query: MasterDataQuery) {
+  public async getMasterData(query: GetDepartmentDto) {
     const users = await this.fetchMasterData(query);
     return this.groupDataByDepartment(users);
   }
-}
-
-export interface MasterDataQuery {
-  skip: number;
-  limit: number;
-  search?: string;
-  order?: string;
-  sortBy?: string;
-  filterKey?: string;
-  filterValue?: string;
 }
