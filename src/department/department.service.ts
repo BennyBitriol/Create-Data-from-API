@@ -16,16 +16,17 @@ export class DepartmentService {
   }: MasterDataQuery) {
     // Create a params object for the Axios request
     const params: { [key: string]: any } = {
-      limit,
-      skip,
-      order: order ?? 'asc', // Default to ascending order
-      sortBy: sortBy ?? 'id', // Default to sorting by id
+      limit: limit ?? 10, // Default to 10 records
+      skip: skip ?? 0, // Default to 0 records
     };
+
+    let url = 'https://dummyjson.com/users';
 
     // Include filter key and value if provided
     if (filterKey && filterValue) {
       params.key = filterKey;
       params.value = filterValue;
+      url += `/filter`;
     }
 
     // Include search query if provided
@@ -33,12 +34,22 @@ export class DepartmentService {
       params.search = search;
     }
 
+    if (order) {
+      params.order = order;
+    }
+
+    if (sortBy) {
+      params.sortBy = sortBy;
+    }
+
     // Make the API call using Axios
     const api = from(
-      axios.get('https://dummyjson.com/users/filter', {
+      axios.get(url, {
         params, // Pass the params object directly
       }),
     );
+
+    console.log('url', url, 'params', params);
 
     const response = await lastValueFrom(api);
 
