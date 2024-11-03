@@ -5,7 +5,8 @@ This application utilizes the **DummyJSON** API to manage user data efficiently.
 ## Features
 
 - **Grouped Users by Department**: Access the API endpoint to retrieve users organized by their respective departments.
-  - **Usage**: Send a request to `/department` to get the list of users categorized by department.
+  - **Usage**: Send a request to `/department/search` to search and get the list of users categorized by department.
+  - **Usage**: Send a request to `/department/filter` to filter and get the list of users categorized by department.
 
 - **Search**: Find users by name.
   - **Example**: `search: 'John'`
