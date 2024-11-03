@@ -1,7 +1,7 @@
 import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class GetDepartmentDto {
+export class GetDepartmentFilterDto {
   @Optional()
   @ApiProperty({
     required: false,
@@ -15,12 +15,6 @@ export class GetDepartmentDto {
   })
   limit: number;
 
-  @Optional()
-  @ApiProperty({
-    required: false,
-    example: 'John',
-  })
-  search?: string;
   @Optional()
   @ApiProperty({
     required: false,

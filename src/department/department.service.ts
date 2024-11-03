@@ -3,6 +3,8 @@ import axios from 'axios';
 import { lastValueFrom, from } from 'rxjs';
 import { IUser } from './interfaces/user';
 import { GetDepartmentDto } from './dtos/get-department.dto';
+import { GetDepartmentFilterDto } from './dtos/get-department-filter.dto';
+import { GetDepartmentSearchDto } from './dtos/get-department-search.dto';
 
 @Injectable()
 export class DepartmentService {
@@ -23,16 +25,19 @@ export class DepartmentService {
 
     let url = 'https://dummyjson.com/users';
 
+    console.log('search', search);
+
     // Include filter key and value if provided
     if (filterKey && filterValue) {
       params.key = filterKey;
       params.value = filterValue;
       url += `/filter`;
-    }
-
-    // Include search query if provided
-    if (search) {
-      params.search = search;
+    } else {
+      // Include search query if provided
+      if (search) {
+        params.q = search;
+        url += `/search`;
+      }
     }
 
     if (order) {
@@ -107,7 +112,12 @@ export class DepartmentService {
     return Object.fromEntries(departmentSummary);
   }
 
-  public async getMasterData(query: GetDepartmentDto) {
+  public async getMasterData(query: GetDepartmentSearchDto) {
+    const users = await this.fetchMasterData(query);
+    return this.groupDataByDepartment(users);
+  }
+
+  public async getFilteredData(query: GetDepartmentFilterDto) {
     const users = await this.fetchMasterData(query);
     return this.groupDataByDepartment(users);
   }

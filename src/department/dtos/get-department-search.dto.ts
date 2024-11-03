@@ -1,7 +1,7 @@
 import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class GetDepartmentDto {
+export class GetDepartmentSearchDto {
   @Optional()
   @ApiProperty({
     required: false,
@@ -34,16 +34,4 @@ export class GetDepartmentDto {
     example: 'firstName',
   })
   sortBy?: string;
-  @Optional()
-  @ApiProperty({
-    required: false,
-    example: 'hair.color',
-  })
-  filterKey?: string;
-  @Optional()
-  @ApiProperty({
-    required: false,
-    example: 'Red',
-  })
-  filterValue?: string;
 }
