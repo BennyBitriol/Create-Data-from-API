@@ -1,20 +1,26 @@
 # User Management Application
 
-This application utilizes the **DummyJSON** API to manage user data efficiently. You can easily search, filter, and sort users based on various parameters.
+This application utilizes the **DummyJSON** API to manage user data efficiently. Users are always grouped by their respective departments, and you can easily search, filter, and sort users based on various parameters.
 
 ## Features
 
+- **Grouped Users by Department**: Access the API endpoint to retrieve users organized by their respective departments.
+  - **Usage**: Send a request to `/department` to get the list of users categorized by department.
+
 - **Search**: Find users by name.
   - **Example**: `search: 'John'`
+  
 - **Filter**: Narrow down results based on specific attributes.
-  - **Example**:
+  - **Example**: 
     - `filterKey: 'hair.color'`
     - `filterValue: 'Brown'`
+  
 - **Pagination**: Control the number of results returned.
   - **Limit**: Specify the number of results per page.
     - **Example**: `limit: 10`
   - **Skip**: Define the starting point for pagination.
     - **Example**: `skip: 0` (pagination starts from 0)
+  
 - **Sorting**: Order results to your preference.
   - **Order**: Choose between ascending or descending order.
     - **Example**: `order: 'asc'`
